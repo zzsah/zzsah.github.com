@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数码时钟</title>
+    <style>
+    body {
+        background-color: black;
+    }
+    
+    #outer {
+    	margin: 20% auto;
+        width: 210px;
+        height: 50px;
+        font: normal bold 50px/50px '宋体';
+        color: white;
+        /*background-color: gray;*/
+    }
+    </style>
+    <script>
+    	window.onload = function (){
+    		showTime();
+    		setInterval(showTime,100);
+    	}
+
+    	function toDouble(num){
+    		if (num > 9) {
+    			return num;
+    		}else{
+    			return "0" + num;
+    		}
+    	}
+    	function showTime(){
+    		var oImg = document.getElementsByTagName("img");
+    		var today = new Date();
+    		var hours = today.getHours();
+    		var minutes = today.getMinutes();
+    		var seconds = today.getSeconds();
+    		var time = toDouble(hours)+ "" + toDouble(minutes)+ "" + toDouble(seconds);
+    		for (var i = oImg.length - 1; i >= 0; i--) {
+    			oImg[i].src = "img/" + time[i] + ".png";
+    		}
+    	}
+
+
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <img src="img/0.png" alt=""><img src="img/0.png" alt="">:<img src="img/0.png" alt=""><img src="img/0.png" alt="">:<img src="img/0.png" alt=""><img src="img/0.png" alt="">
+    </div>
+</body>
+
+</html>

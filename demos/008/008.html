@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表格操作</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <style>
+    #outer {
+        padding: 10px;
+        border: 1px solid black;
+        width: 710px;
+        height: 400px;
+        margin: 20px auto;
+        overflow: auto;
+        position: relative;
+    }
+    
+    table {
+        width: 700px;
+        margin: 10px 0px;
+        border-collapse: collapse;
+    }
+    
+    table,
+    th,
+    td {
+        border: 1px solid #D4D4D4;
+    }
+    
+    table tr:nth-child(odd) {
+        width: 700px;
+        text-align: center;
+        background-color: #FFFFFF;
+    }
+    table tr:nth-child(even) {
+        width: 700px;
+        text-align: center;
+        background-color: #F6F4F0;
+    }
+    table tr:hover {
+        width: 700px;
+        text-align: center;
+        background-color: #FFFFA6;
+    }
+
+    table tr td:nth-child(4) a{
+        color: red;
+    }
+
+    table th {
+        height:20px;
+        width: 175px;
+        text-align: center;
+        background-color: #555555;
+        color: white;
+    }
+    
+    table td {
+        height: 20px;
+        width: 175px;
+        text-align: center;
+    }
+
+
+    </style>
+    <script>
+    window.onload = function() {
+        var oTable = document.getElementById("tab1");
+        var oName = document.getElementById("name");
+        var oAge = document.getElementById("age");
+        var oAdd = document.getElementById("addButton");
+        var oSearch = document.getElementById("searchButton");
+        var oFilter = document.getElementById("filterButton");
+        var oSort = document.getElementById("sortButton");
+        var aRows = oTable.tBodies[0].getElementsByTagName("tr");
+        var id = aRows.length + 1;
+
+        showTable();
+
+        oAdd.onclick = addInformation; //难道事件后面的函数不能加括号？？
+        oSearch.onclick = searchInfo;
+        oFilter.onclick = filterInfo;
+        oSort.onclick = sortInfo;
+
+        deleteRow();
+
+        function addInformation() {
+            var Tr = document.createElement("tr"); //注意：这里createElement前面是document！！！
+            var numTd = document.createElement("td");
+            numTd.innerHTML = id++; //解决编号重复问题。
+            Tr.appendChild(numTd);
+
+            var nameTd = document.createElement("td");
+            nameTd.innerHTML = oName.value;
+            Tr.appendChild(nameTd);
+
+            var ageTd = document.createElement("td");
+            ageTd.innerHTML = oAge.value;
+            Tr.appendChild(ageTd);
+
+            var setTd = document.createElement("td");
+            setTd.innerHTML = "";
+            Tr.appendChild(setTd);
+
+            oTable.tBodies[0].appendChild(Tr);
+            showTable();
+        };
+
+        function showTable() {
+            for (var i = 0; i < aRows.length; i++) {
+                aRows[i].style.display = "";
+                aRows[i].children[3].innerHTML = "<a href='javascript:;'>删除</a>";
+                aRows[i].children[3].getElementsByTagName("a")[0].onclick = function(){
+                    oTable.tBodies[0].removeChild(this.parentNode.parentNode);
+                }
+            }
+
+        }
+
+        function searchInfo() {
+            var searchName = document.getElementById("searchName").value;
+            if (searchName == "") {
+                alert("请输入关键字！");
+                return;
+            }
+            showTable();
+            var arr = searchName.split(' ');
+            var sTab = "";
+            var sText = "";
+            for (var i = aRows.length - 1; i >= 0; i--) {
+                sTab = aRows[i].cells[1].innerHTML.toLowerCase();
+                for (var j = arr.length - 1; j >= 0; j--) {
+                    sText = arr[j].toLowerCase();
+                    if (sTab.search(sText) != -1) {
+                        aRows[i].style.backgroundColor = "pink";
+                    }
+
+                }
+
+            }
+        }
+
+        function filterInfo() {
+            for (var k = aRows.length - 1; k >= 0; k--) {
+                aRows[k].style.display = "none";
+            }
+            var searchName = document.getElementById("searchName").value;
+            var arr = searchName.split(' ');
+            var sTab = "";
+            var sText = "";
+            for (var i = aRows.length - 1; i >= 0; i--) {
+                sTab = aRows[i].cells[1].innerHTML.toLowerCase();
+                for (var j = arr.length - 1; j >= 0; j--) {
+                    sText = arr[j].toLowerCase();
+                    if (sTab.search(sText) != -1) {
+                        aRows[i].style.display = ""; //设置成block table-row都不行
+                    }
+                }
+            }
+        }
+
+        function sortInfo() {
+            var arr = [];
+            for (var i = aRows.length - 1; i >= 0; i--) {
+                arr[i] = aRows[i];
+            }
+            arr.sort(function(li1, li2) {
+                var n1 = parseInt(li1.cells[0].innerHTML);
+                var n2 = parseInt(li2.cells[0].innerHTML);
+                return n1 - n2;
+            });
+            for (var j = 0; j < arr.length; j++) {
+                oTable.tBodies[0].appendChild(arr[j]);
+            }
+            showTable();
+        }
+    };
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <form action="#">
+            姓名：
+            <input id="name" type="text" style="width:100px"> 年龄：
+            <input id="age" type="text" style="width:50px">
+            <input id="addButton" type="button" value="增加">
+            <input id="searchName" type="text" style="width: 100px" placeholder="按姓名搜索">
+            <input id="searchButton" type="button" value="搜索">
+            <input id="filterButton" type="button" value="筛选">
+            <input id="sortButton" type="button" value="排序">
+        </form>
+        <table id="tab1">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3</td>
+                    <td>王五</td>
+                    <td>21</td>
+                    <td>删除</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>李四</td>
+                    <td>23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>王六</td>
+                    <td>27</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>张六</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>张三</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>王七</td>
+                    <td>25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>王八</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>张八</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>张四</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>张七</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>张五</td>
+                    <td>22</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

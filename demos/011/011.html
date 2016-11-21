@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>多属性运动</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <style>
+    #div1 {
+        height: 100px;
+        width: 100px;
+        background-color: green;
+        opacity: 0.6;
+        filter: alpha(opacity=60);
+    }
+    #nav{
+        height: 50px;
+        display: none;
+        float: right;
+        color: white;
+    }
+    #nav li{
+        height: 50px;
+        width: 80px;
+        text-align: center;
+        float: left;
+        margin-left: 20px;
+        font: normal normal 20px/50px "宋体";
+    }
+    #nav li:hover{
+        background-color: #0E7000;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var oDiv = document.getElementById("div1");
+        oDiv.onmouseover = function() {
+            startMove(oDiv, {
+                width: 300,
+                height: 300,
+                opacity: 100
+            }, function() {
+                startMove(oDiv, {
+                    width: window.innerWidth,
+                    height: 50,
+                    opacity: 100
+                }, function() {
+                    document.getElementById("nav").style.display = "block";
+                    oDiv.onmouseover = function(){};
+                })
+            });
+        };
+    };
+
+
+
+    function startMove(obj, json, fnEnd) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function() {
+            var bStop = true;
+            for (var attr in json) {
+                var cur = 0;
+                if (attr == "opacity") {
+                    cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                } else {
+                    cur = parseInt(getStyle(obj, attr));
+                }
+                if (cur != json[attr]) {
+                    bStop = false;
+                }
+                var speed = (json[attr] - cur) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (attr == "opacity") {
+                    obj.style.filter = "alpha(opacity=" + cur + speed + ")";
+                    obj.style.opacity = (cur + speed) / 100;
+                } else {
+                    obj.style[attr] = cur + speed + "px";
+                }
+            }
+            if (bStop) {
+                clearInterval(obj.timer);
+                if (fnEnd) fnEnd();
+            }
+        }, 15);
+    }
+
+
+
+    function getStyle(obj, attr) {
+        if (obj.currentStyle) {
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <ul id="nav">
+            <li>首页</li>
+            <li>案例</li>
+            <li>新闻</li>
+            <li>论坛</li>
+            <li>关于</li>
+        </ul>
+    </div>
+</body>
+
+</html>

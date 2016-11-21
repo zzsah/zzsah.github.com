@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <style>
+    #div1 {
+        width: 712px;
+        height: 108px;
+        background-color: gray;
+        position: relative;
+        margin: 20% auto 10px auto;
+        overflow: hidden;
+    }
+    
+    #div1 ul {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+    
+    #div1 ul li {
+        list-style: none;
+        float: left;
+        height: 108px;
+        width: 178px;
+    }
+    
+    #control {
+        width: 100px;
+        height: 30px;
+        margin: 10px auto;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        rollingImg();
+
+    };
+
+    function rollingImg() {
+        var oUl = document.getElementsByTagName("ul")[0];
+        var aLi = oUl.getElementsByTagName("li");
+        var a = document.getElementById("speed").value;
+        // alert("haha");
+        timer = setInterval(move, 30);
+        oUl.innerHTML = oUl.innerHTML + oUl.innerHTML;
+        oUl.style.width = aLi.length * aLi[0].offsetWidth + "px";
+
+        function move() {
+            if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+                oUl.style.left = "0px";
+            }
+            if (oUl.offsetLeft > 0) {
+                oUl.style.left = -oUl.offsetWidth / 2 + "px";
+            }
+            oUl.style.left = (oUl.offsetLeft - a) + 'px';
+        }
+    }
+
+    function changeSpeed(a) {
+        var speed = document.getElementById("speed");
+        // alert(a);
+        switch (a) {
+            case "left":
+                speed.value = speed.value - 1;
+                break;
+            case "right":
+                speed.value = parseInt(speed.value) + 1;
+                break;
+        }
+        window.clearInterval(timer);
+        rollingImg();
+    }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <ul>
+            <li><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+            <li><img src="img/4.jpg" alt=""></li>
+        </ul>
+    </div>
+    <div id="control">
+        <input type="button" value="<<" name="toLeft" title="toLeft" onclick="changeSpeed('left')">
+        <input type="text" value="1" style="width: 20px" id="speed">
+        <input type="button" value=">>" name="toRight" title="toRight" onclick="changeSpeed('right')" ; rollingImg()>
+    </div>
+</body>
+
+</html>
