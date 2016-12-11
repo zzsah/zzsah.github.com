@@ -1,0 +1,9 @@
+@import url(../../css/reset.css);
+body{
+	background-color:#B6FFB5;
+}
+
+#nav li{
+	background-color: green;
+	color: white;
+}

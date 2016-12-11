@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>自动播放广告</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <style>
+    #outer {
+        height: 150px;
+        width: 470px;
+        border: 2px solid gray;
+        margin: 30px auto;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #outer ul li {
+        height: 150px;
+        width: 470px;
+    }
+    
+    ul {
+        width: 470px;
+        position: absolute;
+        height: 750px;
+        top: 0px;  /* 注意这里要是不设置top的值  IE下将会不兼容*/
+    }
+    
+    ol {
+        height: 20px;
+        width: 130px;
+        position: absolute;
+        bottom: 10px;
+        left: 20px;
+        /*background-color: pink;*/
+    }
+    
+    .checked {
+        margin: 0px 2px;
+        height: 20px;
+        width: 20px;
+        float: left;
+        border: 1px solid orange;
+        background-color: #FFDC58;
+        font: normal normal 13px/20px "宋体";
+        text-align: center;
+    }
+    
+    .unchecked {
+        margin: 0px 4px;
+        float: left;
+        height: 16px;
+        width: 16px;
+        border: 1px solid orange;
+        background-color: #FFDC58;
+        font: normal normal 13px/15px "宋体";
+        text-align: center;
+    }
+    
+    #div2 {
+        height: 200px;
+        width: 200px;
+        background-color: pink;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        function getStyle(obj, name) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[name];
+            } else {
+                return getComputedStyle(obj, false)[name];
+            }
+        }
+
+
+        //startMove(oDiv, {width: 400, height: 400})
+
+
+        function startMove(obj, json, fnEnd) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function() {
+                var bStop = true; //假设：所有值都已经到了
+
+                for (var attr in json) {
+                    var cur = 0;
+
+                    if (attr == 'opacity') {
+                        cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                    } else {
+                        cur = parseInt(getStyle(obj, attr));
+                    }
+
+                    var speed = (json[attr] - cur) / 6;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                    if (cur != json[attr])
+                        bStop = false;
+
+                    if (attr == 'opacity') {
+                        obj.style.filter = 'alpha(opacity:' + (cur + speed) + ')';
+                        obj.style.opacity = (cur + speed) / 100;
+                    } else {
+                        obj.style[attr] = cur + speed + 'px';
+                    }
+                }
+
+                if (bStop) {
+                    clearInterval(obj.timer);
+
+                    if (fnEnd) fnEnd();
+                }
+            }, 30);
+        }
+
+
+        var oDiv = document.getElementById("outer");
+        var oUl = document.getElementsByTagName("ul")[0];
+        var oLiPic = document.getElementById("pics").getElementsByTagName("li");
+        var oLiBtn = document.getElementById("btns").getElementsByTagName("li");
+        var now = 0;
+        for (var i = 0; i < oLiBtn.length; i++) {
+            oLiBtn[i].index = i;
+            oLiBtn[i].onclick = function() {
+                now = this.index;
+                tab();
+
+            };
+        }
+
+
+        function tab() {
+            for (var i = 0; i < oLiBtn.length; i++) {
+                oLiBtn[i].className = "unchecked";
+            }
+            oLiBtn[now].className = "checked";
+            startMove(oUl, {top: -150*now});
+        }
+
+        // function tab() {
+        //     for (var i = 0; i < aBtn.length; i++) {
+        //         aBtn[i].className = '';
+        //     }
+        //     aBtn[now].className = 'active';
+        //     startMove(oUl, {
+        //         top: -150 * now
+        //     });
+        // }
+
+        var timer = setInterval(function() {
+            now++;
+            if (now == oLiPic.length) {
+                now = 0
+            };
+            tab();
+        }, 2000);
+
+        oDiv.onmouseover = function() {
+            clearInterval(timer);
+        };
+        oDiv.onmouseout = function() {
+            timer = setInterval(function() {
+                now++;
+                if (now == oLiPic.length) {
+                    now = 0
+                };
+                tab();
+            }, 2000);
+        };
+    };
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="pics">
+            <li>
+                <a href="#"><img src="./images/1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/2.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/3.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/4.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./images/5.jpg" alt=""></a>
+            </li>
+        </ul>
+        <ol id="btns">
+            <li class="checked"></li>
+            <li class="unchecked"></li>
+            <li class="unchecked"></li>
+            <li class="unchecked"></li>
+            <li class="unchecked"></li>
+        </ol>
+    </div>
+</body>
+
+</html>

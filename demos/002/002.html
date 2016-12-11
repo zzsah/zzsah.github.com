@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>网页换肤</title>
+    <link rel="stylesheet" href="black.css">
+    <script>
+    window.onload = function() {
+        boxClick();
+        setCheckBox();
+    };
+
+
+    function setCheckBox(){
+        var checkBox = document.getElementById("skin").getElementsByTagName("li");
+        for(var i = 0; i < checkBox.length; i++){
+            var li = checkBox[i];
+            if(li.getAttribute("id")=="black"){
+                toChecked(li);
+            }else{
+                toUnChecked(li);
+            }
+        }
+    }
+    function toUnChecked(li) {
+        var color = li.getAttribute("id");
+        li.style.width = "15px";
+        li.style.height = "15px";
+        li.style.backgroundColor = color;
+        li.style.borderColor = color;
+        li.style.borderWidth = "0px";
+        li.style.borderStyle = "solid";
+
+    }
+
+    function toChecked(li) {
+
+        var color = li.getAttribute("id");
+        li.style.width = "5px";
+        li.style.height = "5px";
+        li.style.backgroundColor = "white";
+        li.style.borderColor = color;
+        li.style.borderWidth = "5px";
+        li.style.borderStyle = "solid";
+        var link = document.getElementsByTagName("link")[0];
+        link.setAttribute("href",color + ".css");
+    }
+
+    function boxClick() {
+        var checkBox = document.getElementById("skin").getElementsByTagName("li");
+        for (var i = 0; i < checkBox.length; i++) {
+            checkBox[i].onclick = function() {
+                if (this.style.borderWidth == "5px") {
+                    return;
+                } else {
+                    for (var a = 0; a < checkBox.length; a++) {
+                        if (checkBox[a].style.backgroundColor == "white") {
+                            toUnChecked(checkBox[a]);
+                        }
+                    }
+                    toChecked(this);
+                }
+            };
+        }
+    }
+    </script>
+    <style>
+    header {
+        height: 200px;
+        width: 600px;
+        margin: 0px auto;
+    }
+    
+    #skin {
+        margin-top: 20px;
+        height: 50px;
+    }
+    
+    #skin li {
+        float: left;
+        margin-right: 10px;
+    }
+    
+    #nav {
+        height: 30px;
+        clear: both;
+    }
+    
+    #nav ul {
+        display: block;
+        margin: 0px auto;
+    }
+    
+    #nav li {
+        height: 30px;
+        width: 100px;
+        font: normal normal 20px/30px Tahoma;
+        text-align: center;
+        float: left;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <header>
+            <div id="skin">
+                <li id="red"></li>
+                <li id="green"></li>
+                <li id="black"></li>
+            </div>
+            <div id="nav">
+                <li href="#">新闻</li>
+                <li href="#">娱乐</li>
+                <li href="#">体育</li>
+                <li href="#">电影</li>
+                <li href="#">音乐</li>
+                <li href="#">旅游</li>
+            </div>
+        </header>
+    </div>
+</body>
+
+</html>
