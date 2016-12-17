@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>提示框效果</title>
+    <style>
+    h3,
+    img,
+    li,
+    ul,
+    div {
+        margin: 0;
+        padding: 0;
+    }
+    
+    li {
+        list-style: none;
+    }
+    
+    h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    #outer {
+        width: 550px;
+        height: 280px;
+        margin: 20px auto;
+        border: 1px solid gray;
+        padding-left: 10px;
+        padding-top: 20px;
+    }
+    
+    li {
+        margin: 10px 10px 0px 0px;
+        border: 1px solid gray;
+        padding: 5px;
+        width: 88px;
+        height: 89px;
+        float: left;
+        position: relative;
+        background-color: #ccc;
+    }
+    
+    li a {
+        font: normal normal 13px/20px '宋体';
+        text-decoration: none;
+        color: black;
+        position: absolute;
+        z-index: 0;
+    }
+    
+    li a strong {
+        display: block;
+        font: normal bold 15px/20px '宋体';
+    }
+    
+    img {
+        position: absolute;
+        /*display: ;*/
+        border:2px solid gray;
+        z-index: 1;
+        top: -18px;
+        left: -18px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        /*
+			opacity: 0;
+			filter: alpha(opacity=0);
+*/
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var oImgs = document.getElementsByTagName('img');
+        var oLis = document.getElementsByTagName('li');
+
+        var now = 0;
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].index = i;
+            oLis[i].onmouseover = function() {
+                now = this.index;
+                showImg(now);
+            };
+        }
+        for (var j = 0; j < oImgs.length; j++) {
+            oImgs[j].onmouseout = function() {
+                startMove(oImgs[now], {
+                    opacity: 0
+                },function(){
+                	// oImgs[now].style.display = "none";
+                });
+            }
+        }
+
+        function showImg(now) {
+            // oImgs[now].style.display = "block";
+            startMove(oImgs[now], {
+                opacity: 100
+            });
+        }
+    };
+
+
+
+    function getStyle(obj, attr) {
+        if (obj.currentStyle) {
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle(obj, null)[attr];
+        }
+    }
+
+    function startMove(obj, json, fnEnd) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function() {
+            var bStop = true;
+            for (var attr in json) {
+                var cur = 0;
+                if (attr == "opacity") {
+                    cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+                } else {
+                    cur = parseInt(getStyle(obj, attr));
+                }
+                var speed = (json[attr] - cur) / 10;
+                speed = (speed > 0) ? Math.ceil(speed) : Math.floor(speed);
+                if (cur != json[attr]) {
+                    bStop = false;
+                }
+                if (attr == "opacity") {
+                    obj.style[attr] = parseInt(cur + speed) / 100;
+                    obj.style.filter = "alpha(opacity=" + parseInt(cur + speed) + ")";
+                } else {
+                    obj.style[attr] = parseInt(cur + speed) + "px";
+                }
+            }
+            if (bStop) {
+                clearInterval(obj.timer);
+                if (fnEnd) fnEnd();
+            }
+        }, 15);
+    }
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <h3>鼠标移过显示放大车标</h3>
+        <ul>
+            <li>
+                <a href="javascript:;" title="BMW 宝马汽车"><strong>BMW</strong>宝马汽车</a>
+                <img src="img/1.jpg" alt="BMW 宝马汽车" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Alfa Romeo 阿尔法-罗米欧"><strong>Alfa Romeo</strong> 阿尔法-罗米欧</a>
+                <img src="img/2.jpg" alt="Alfa Romeo 阿尔法-罗米欧" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Skoda 斯柯达"><strong>Skoda</strong> 斯柯达</a>
+                <img src="img/3.jpg" alt="Skoda 斯柯达" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Volkswagen 大众汽车"><strong>Volkswagen</strong> 大众汽车</a>
+                <img src="img/4.jpg" alt="Volkswagen 大众汽车" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Saab 萨布牌轿"><strong>Saab</strong> 萨布牌轿车</a>
+                <img src="img/5.jpg" alt="Saab 萨布牌轿" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Lamborghini 兰博基尼"><strong>Lamborghini</strong> 兰博基尼</a>
+                <img src="img/6.jpg" alt="Lamborghini 兰博基尼" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Porsche 保时捷"><strong>Porsche</strong> 保时捷</a>
+                <img src="img/7.jpg" alt="Porsche 保时捷" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Peugeot 标致"><strong>Peugeot</strong> 标致</a>
+                <img src="img/8.jpg" alt="Peugeot 标致" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Mercedes1 梅赛德斯 奔驰"><strong>Mercedes1</strong> 梅赛德斯 奔驰</a>
+                <img src="img/9.jpg" alt="Mercedes1 梅赛德斯 奔驰" />
+            </li>
+            <li>
+                <a href="javascript:;" title="Buick 别克汽车"><strong>Buick</strong> 别克汽车</a>
+                <img src="img/10.jpg" alt="Buick 别克汽车" />
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

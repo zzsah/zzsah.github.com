@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas时钟</title>
+    <style>
+    div {
+        text-align: center;
+        margin-top: 10%;
+    }
+    
+    #clock {
+        /*border: 1px solid gray;*/
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var canvas = document.getElementById("clock");
+        var rr = 2*window.innerHeight/ 3;
+        canvas.setAttribute("width", rr);
+        canvas.setAttribute("Height", rr);
+        var ctx = canvas.getContext('2d');
+        var width = ctx.canvas.width;
+        var height = ctx.canvas.height;
+        bgLineWidth = width / 30;
+        hLineWidth = width / 50;
+        mLineWidth = width / 60;
+        var r = width / 2;
+
+        var timer = setInterval(showClock, 15);
+
+        function showClock() {
+            ctx.clearRect(0, 0, width, height); //清除整个画布
+            var time = new Date();
+            var hour = time.getHours();
+            var minute = time.getMinutes();
+            var second = time.getSeconds();
+            drawBackground();
+            drawHour(hour, minute);
+            drawMinute(minute);
+            drawSecond(second);
+            drawDot();
+            ctx.restore(); //恢复画笔的状态（把绘制参考点设置成(0,0)）
+        }
+
+
+
+        function drawBackground() {
+            ctx.save(); //保存绘制之前的画笔状态（绘制参考点为(0,0)）
+            ctx.translate(r, r); //把绘制起始点移动到画布的中心
+            ctx.beginPath(); //开始路径
+            ctx.lineWidth = bgLineWidth; //定义圆线的宽度为10
+            ctx.arc(0, 0, r - bgLineWidth / 2, 0, 2 * Math.PI, false); //绘制一个圆，注意半径指的是圆线宽度的一半到圆点的距离。
+            ctx.closePath(); //结束定义
+            ctx.stroke(); //绘制方式为路径
+
+            //绘制小时数
+            ctx.font = bgLineWidth * 2 + "px Arial"; //设置绘制文字的字体
+            ctx.textAlign = "center"; //设置文字的对齐方式居中
+            ctx.textBaseline = "middle"; //设置文字的参考绘制点为设置点的中心
+            var hourNumbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2];
+            for (var i = 0; i < hourNumbers.length; i++) {
+                var rad1 = 2 * Math.PI / 12 * i;
+                var x1 = Math.cos(rad1) * (r - 2.5 * bgLineWidth);
+                var y1 = Math.sin(rad1) * (r - 2.5 * bgLineWidth);
+                ctx.fillText(hourNumbers[i], x1, y1);
+            }
+
+            //绘制分钟数
+            // ctx.font = bgLineWidth/2 + "px Arial"; //设置绘制文字的字体
+            // for (var j = 0; j < 60; j++) {
+            //     var rad2 = 2 * Math.PI / 60 * j;
+            //     var minuteNumber = j + 15;
+            //     var x2 = Math.cos(rad2) * (r - 2*bgLineWidth);
+            //     var y2 = Math.sin(rad2) * (r - 2*bgLineWidth);
+            //     if (minuteNumber > 60) {
+            //         minuteNumber = minuteNumber - 60;
+            //     }
+            //     if (minuteNumber % 5 !== 0) {
+            //         ctx.fillText(minuteNumber, x2, y2);
+            //     }
+            // }
+
+            //绘制分钟点
+            ctx.font = bgLineWidth / 2 + "px Arial"; //设置绘制文字的字体
+            for (var j = 0; j < 60; j++) {
+                ctx.beginPath(); //开始路径
+                ctx.fillStyle = "gray";
+                var rad2 = 2 * Math.PI / 60 * j;
+                var minuteNumber = j;
+                var x2 = Math.cos(rad2) * (r - 4.5 * bgLineWidth);
+                var y2 = Math.sin(rad2) * (r - 4.5 * bgLineWidth);
+                if (minuteNumber % 5 !== 0) {
+                    ctx.arc(x2, y2, mLineWidth / 2, 0, 2 * Math.PI, false); //绘制一个圆，注意半径指的是圆线宽度的一半到圆点的距离。
+                    // ctx.fillText(minuteNumber, x2, y2);
+                } else {
+                    ctx.arc(x2, y2, mLineWidth, 0, 2 * Math.PI, false);
+                }
+                ctx.closePath(); //结束定义
+                ctx.fill(); //绘制方式为填充
+            }
+        }
+
+        function drawHour(hour, minute) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rotate((30 * hour * Math.PI / 180) + (30 * minute * Math.PI / 180) / 60); //小时的弧度加上分钟的弧度。
+            ctx.lineWidth = hLineWidth;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, hLineWidth * 2);
+            ctx.lineTo(0, -4 * r / 9);
+            ctx.stroke();
+            ctx.closePath(); //此处两行不能颠倒位置，如果先闭合路径再绘制就不会有端点样式
+            ctx.restore(); //此处与此函数开始的.save()方法搭配，目的是先保存旋转时针之前的状态，旋转完成后再恢复画布状态，若不执行此操作会导致下面绘制分针旋转初始值是时针的旋转之后的弧度。
+        }
+
+        function drawMinute(minute) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rotate(6 * minute * Math.PI / 180);
+            ctx.lineWidth = mLineWidth;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, hLineWidth * 3);
+            ctx.lineTo(0, -5 * r / 9);
+            ctx.stroke();
+            ctx.closePath(); //此处两行不能颠倒位置，如果先闭合路径再绘制就不会有端点样式
+            ctx.restore();
+        }
+
+        function drawSecond(second) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rotate(6 * second * Math.PI / 180);
+            ctx.fillStyle = "#CB3333";
+            ctx.moveTo(-3, hLineWidth * 4);
+            ctx.lineTo(3, hLineWidth * 4);
+            ctx.lineTo(1, -5 * r / 8);
+            ctx.lineTo(-1, -5 * r / 8);
+            ctx.fill();
+            ctx.closePath(); //此处两行不能颠倒位置，如果先闭合路径再绘制就不会有端点样式
+            ctx.restore();
+        }
+
+        function drawDot() {
+            ctx.save();
+            ctx.beginPath(); //开始路径
+            ctx.fillStyle = "white";
+            ctx.arc(0, 0, 2, 0, 2 * Math.PI, false); //绘制一个圆，注意半径指的是圆线宽度的一半到圆点的距离。
+            ctx.closePath(); //结束定义
+            ctx.fill(); //绘制方式为填充
+            ctx.restore();
+        }
+
+    };
+    </script>
+</head>
+
+<body>
+    <div>
+        <canvas id="clock" height="500px" width="500px"></canvas>
+    </div>
+</body>
+
+</html>

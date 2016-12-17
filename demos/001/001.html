@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <style>
+    .outer {
+        width: 500px;
+        margin: 0 auto;
+    }
+    
+    #div1 {
+        height: 100px;
+        width: 100px;
+        background-color: black;
+        margin: 20px 0px;
+    }
+    
+    #div2 {
+        background-color: #FFEA5F;
+        height: 20px;
+        width: 250px;
+        display: none;
+        font: normal normal 13px/13px "Microsoft YaHei"
+    }
+    </style>
+    <script>
+    // 方法一：
+    // function changeDiv() {
+    //     var oDiv = document.getElementById("div1");
+    //     if (arguments.length % 2 === 0) {
+    //         if (arguments.length == 2) {
+    //             oDiv.style[arguments[0]] = arguments[1];
+    //         } else {
+    //             for (var i = 0; i < arguments.length; i = i + 2) {
+    //                 oDiv.style[arguments[i]] = arguments[i + 1];
+    //             }
+    //         }
+    //     }
+
+    // }
+
+    // function showBox(a){
+    //  var oDiv = document.getElementById("div2");
+    //  oDiv.style.display = a;
+    // }
+
+    //方法二：
+
+    window.onload = function() {
+        var oDiv = document.getElementById("div1");
+        var oBtns = document.getElementsByTagName("input");
+        var aAttr = ["height", "width", "backgroundColor", "display"];
+        var aValue = ["200px", "200px", "blue", "none"];
+
+        for (var i = 0; i < oBtns.length; i++) {
+            oBtns[i].index = i;
+            if (i == oBtns.length -1) {
+                oBtns[i].onclick = function() {
+                    oDiv.style.cssText = "";
+                };
+            } else {
+                oBtns[i].onclick = function() {
+                    var now = this.index;
+                    changeStyle(now);
+                };
+            }
+        }
+
+        function changeStyle(i) {
+            oDiv.style[aAttr[i]] = aValue[i];
+        }
+    };
+    </script>
+</head>
+<!--
+方法一:
+<body>
+    <div class="outer">
+        <h1>控制div样式</h1>
+        <input type="button" value="变高" onclick="changeDiv('height','200px')">
+        <input type="button" value="变宽" onclick="changeDiv('width','200px')">
+        <input type="button" value="变蓝" onclick="changeDiv('background-color','blue')">
+        <input type="button" value="隐藏" onclick="changeDiv('display','none')">
+        <input type="button" value="重置" onclick="changeDiv('width','100px','height','100px','display','block','background-color','black')">
+        <div id="div1"></div>
+    </div>
+    <div class="outer">
+        </form>
+    </div>
+</body>
+ -->
+
+<body>
+    <div class="outer">
+        <h1>控制div样式</h1>
+        <input type="button" value="变高">
+        <input type="button" value="变宽">
+        <input type="button" value="变蓝">
+        <input type="button" value="隐藏">
+        <input type="button" value="重置">
+        <div id="div1"></div>
+    </div>
+    <div class="outer">
+        </form>
+    </div>
+</body>
+
+</html>

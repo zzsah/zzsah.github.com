@@ -1,0 +1,161 @@
+@import url(reset.css);
+
+/*引入自定义字体*/
+
+
+/*
+@font-face {
+    font-family: lixv;
+    src: url(../font/lixv.ttf),
+    url('../font/lixv.eot');
+}
+*/
+
+html {
+    /*overflow: hidden;*/
+}
+
+.liBox h1 {
+    height: 25px;
+    font: normal bold 14px/25px 'Microsoft Yahei';
+    padding-left: 10px;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    /*background-color: orange;*/
+    position: absolute;
+    z-index: 1;
+}
+
+aside {
+    width: 210px;
+    height: 100%;
+    position: absolute;
+    background-color: #eee;
+    box-shadow: 4px 4px 4px rgba( 150, 150, 150, 0.3);
+    overflow: hidden;
+    bottom: 0px;
+    z-index: 3;
+}
+
+#logo {
+    height: 64px;
+    background-color: #ddd;
+    width: 190px;
+    padding: 8px 0px 8px 10px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 4px 4px 8px rgba( 150, 150, 150, 0.3);
+}
+
+#photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 4px rgba( 150, 150, 150, 0.5);
+    float: left;
+    overflow: hidden;
+}
+
+#photo img {
+    width: 64px;
+    height: 64px;
+    /*border-radius: 50%;
+    box-shadow: 4px 4px 4px rgba( 150, 150, 150, 0.5);
+    float: left;*/
+}
+
+#name {
+    float: left;
+    width: 120px;
+    height: 64px;
+    padding: 0px 0px 0px 5px;
+}
+
+#name h1 {
+    font: normal normal 18px/40px 'Microsoft YaHei';
+}
+
+#name p {
+    color: gray;
+    font: normal normal 12px/20px 'Microsoft YaHei';
+}
+
+#demoList {
+    /*background-color: #eeeeee;*/
+    width: 200px;
+    overflow-y: scroll;
+    margin: 10px 0px 10px 0px;
+    /*padding: 5px 0px;*/
+}
+
+.liBox {
+    height: 25px;
+    overflow: hidden;
+    width: 180px;
+}
+
+.checkedH1 {
+    user-select: none;
+    cursor: default;
+    height: 25px;
+    /*background-color: #99CC00;*/
+    /*border-left: 5px solid #99CC00;*/
+    padding-left: 10px;
+    font: normal bold 14px/25px 'Microsoft Yahei';
+    background-color: #bbbbbb;
+}
+
+.unCheckedH1 {
+    user-select: none;
+    /*禁止选中文字  有兼容问题，待后续改善*/
+    cursor: default;
+    /*鼠标样式*/
+    height: 25px;
+    /*background-color: gray;*/
+    padding-left: 10px;
+    font: normal bold 14px/25px 'Microsoft Yahei';
+}
+
+.unCheckedH1:hover {
+    background-color: #cccccc;
+}
+
+.unChecked {
+    height: 25px;
+    display: block;
+    font: normal normal 14px/25px 'Microsoft Yahei';
+    color: black;
+    padding-left: 15px;
+}
+
+.unChecked:hover {
+    background-color: #cccccc;
+}
+
+.checked {
+    height: 25px;
+    display: block;
+    font: normal bold 14px/25px 'Microsoft Yahei';
+    /*color: gray;*/
+    padding-left: 10px;
+    /*  border-top: 3px solid #eeeeee;
+    border-bottom: 3px solid #eeeeee;*/
+    border-left: 5px solid #99CC00;
+}
+
+#content {
+    height: 100%;
+    width: auto;
+    margin-left: 210px;
+    bottom: 0px;
+    z-index: 2;
+    overflow: hidden;
+}
+#iframeBox {
+    width: 100%;
+    height: 100%;
+}

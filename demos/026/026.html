@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>网页计算器</title>
+    <style>
+    ul,
+    div,
+    li {
+        margin: 0;
+        padding: 0;
+    }
+    
+    li {
+        list-style: none;
+        font: normal bold 20px/35px Arial;
+        text-align: center;
+        user-select: none;
+        /*禁止选中文字  有兼容问题，待后续改善*/
+    }
+    
+    a {
+        width: 100%;
+        height: 100%;
+        color: white;
+        text-decoration: none;
+        user-select: none;
+        /*禁止选中文字  有兼容问题，待后续改善*/
+    }
+    
+    #calc {
+        margin: 10px auto;
+        width: 300px;
+        height: 400px;
+        background-color: black;
+    }
+    
+    #formula {
+        border: 0px;
+        outline: none;
+        width: 280px;
+        height: 20px;
+        background-color: gray;
+        color: lightgreen;
+        padding: 0px 10px;
+        margin-top: 20px;
+    }
+    
+    #inputText {
+        border: 0px;
+        outline: none;
+        width: 280px;
+        height: 50px;
+        background-color: gray;
+        font: normal bold 40px/50px Arial;
+        color: white;
+        padding: 0px 10px;
+    }
+    
+    ul {
+        width: 280px;
+        height: 280px;
+        margin: 25px 0px 0px 15px;
+        background-color: black;
+    }
+    
+    .btn1 {
+        margin-right: 10px;
+        margin-bottom: 20px;
+        height: 35px;
+        width: 60px;
+        float: left;
+        background-color: orange;
+    }
+    
+    .btn1:hover {
+        background-color: #F8B922;
+    }
+    
+    .number {
+        margin-right: 10px;
+        margin-bottom: 20px;
+        height: 35px;
+        width: 60px;
+        float: left;
+        background-color: gray;
+    }
+    
+    .number:hover {
+        background-color: #616161;
+    }
+    
+    .compute {
+        width: 60px;
+        height: 90px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        background-color: orange;
+        float: right;
+        font: normal bold 20px/90px Arial;
+    }
+    
+    .compute:hover {
+        background-color: #F8B922;
+    }
+    
+    .number0 {
+        width: 60px;
+        height: 35px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        background-color: gray;
+        float: left;
+    }
+    
+    .number0:hover {
+        background-color: #616161;
+    }
+    
+    .dot {
+        width: 60px;
+        height: 35px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        background-color: orange;
+        float: left;
+    }
+    
+    .dot:hover {
+        background-color: #F8B922;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var inputText = document.getElementById("inputText");
+        var formula = document.getElementById("formula");
+        var computeBtn = document.getElementsByClassName("compute")[0];
+        var Btns = document.getElementsByTagName("li");
+        for (var i = 0; i < Btns.length; i++) {
+            Btns[i].onclick = click;
+        }
+
+        function click() {
+            var value = this.children[0].innerHTML;
+            var reg = /\d+\./g;
+            switch (value) {
+                case "C":
+                    formula.value = "";
+                    inputText.value = "";
+                    break;
+                case "%":
+                    if (inputText.value != "" && !/\%$/.test(inputText.value) && !/[\d\)\%]$/.test(formula.value)) {
+                        if (/^\(/.test(inputText.value)) {
+                            inputText.value = inputText.value + "%";
+                        } else {
+                            inputText.value = "(" + inputText.value + ")%";
+                        }
+                    }
+                    break;
+                case "x":
+                    com1("x");
+                    break;
+                case "÷":
+                    com1("÷");
+                    break;
+                case "-":
+                    if (inputText.value == "()") {
+                        inputText.value = "(-" + ")";
+                    } else {
+                        com1("-");
+                    }
+                    break;
+                case "+":
+                    com1("+");
+                    break;
+                case "=":
+                    com();
+                    break;
+                case "()":
+                    if (!/[\d\)]$/.test(formula.value) && !/^\(/.test(inputText.value)) {
+                        inputText.value = "(" + inputText.value + ")";
+                    }
+                    break;
+                case ".":
+                    if (/^\(\-\)/.test(inputText.value)||/^(\()?(\-)?\d+\./.test(inputText.value) || inputText.value == "" || /[\)\d]$/.test(formula.value)) {
+                        return;
+                    } else if (!/^\(/.test(inputText.value)) {
+                        inputText.value = inputText.value + ".";
+                    } else {
+                        inputText.value = inputText.value.substring(0, (inputText.value.length - 1)) + ".)";
+                    }
+                    break;
+                case "0":
+                    if (inputText.value == "(-0)" || inputText.value == "0" || inputText.value == "(0)") {
+                        return;
+                    }
+                    inputNumber(value);
+                    break;
+                default:
+                    inputNumber(value);
+            }
+        }
+
+        function inputNumber(num) {
+            if (/\%$/.test(inputText.value)) {
+                return;
+            }
+            if (/[\)\d\%]$/.test(formula.value)) {
+
+                inputText.value = "";
+                formula.value = "";
+            }
+            if (inputText.value == "0") {
+                inputText.value = "";
+            }
+            if (inputText.value == "(0)") {
+                inputText.value = "()";
+            }
+            if (/^\(/.test(inputText.value)) {
+                inputText.value = "(" + inputText.value.substring(1, (inputText.value.length - 1)) + num + ")";
+            } else {
+                inputText.value = inputText.value + num;
+            }
+        }
+
+        function com() {
+            if (/[\d\)\%]$/.test(formula.value) || inputText.value == "") {
+                return;
+            }
+            if (inputText.value < 0) {
+                inputText.value = "(" + inputText.value + ")";
+            }
+            formula.value = formula.value + inputText.value;
+            inputText.value = "";
+            formula.value = formula.value.replace("x", "*");
+            formula.value = formula.value.replace("÷", "/");
+            formula.value = formula.value.replace(/\%/, "/100");
+            inputText.value = (eval(formula.value));
+
+            formula.value = formula.value.replace("/100", "%");
+            formula.value = formula.value.replace(/\*/, "x");
+            formula.value = formula.value.replace("\/", "÷");
+
+        }
+
+        function com1(a) {
+            if (inputText.value == "" && formula.value == "") {
+                return;
+            }
+            if (/[\+\-x÷]$/.test(formula.value) && inputText.value != "") {
+                com();
+            }
+            if (inputText.value == "") {
+                formula.value = formula.value.substring(0, (formula.value.length - 1)) + a;
+            } else {
+                formula.value = inputText.value + a;
+                inputText.value = "";
+            }
+        }
+    };
+    </script>
+</head>
+
+<body>
+    <div id="calc">
+        <input id="formula" type="text" readonly="readonly">
+        <input id="inputText" type="text" readonly="readonly">
+        <ul>
+            <li class="btn1"><a href="#">C</a></li>
+            <li class="btn1"><a href="#">%</a></li>
+            <li class="btn1"><a href="#">x</a></li>
+            <li class="btn1"><a href="#">÷</a></li>
+            <li class="number"><a href="#">7</a></li>
+            <li class="number"><a href="#">8</a></li>
+            <li class="number"><a href="#">9</a></li>
+            <li class="btn1"><a href="#">+</a></li>
+            <li class="number"><a href="#">4</a></li>
+            <li class="number"><a href="#">5</a></li>
+            <li class="number"><a href="#">6</a></li>
+            <li class="btn1"><a href="#">-</a></li>
+            <li class="number"><a href="#">1</a></li>
+            <li class="number"><a href="#">2</a></li>
+            <li class="number"><a href="#">3</a></li>
+            <li class="compute"><a href="#">=</a></li>
+            <li class="number0"><a href="#">0</a></li>
+            <li class="dot"><a href="#">.</a></li>
+            <li class="btn1"><a href="#">()</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

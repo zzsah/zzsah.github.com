@@ -1,0 +1,117 @@
+/*@import url(../../css/reset.css);
+*/
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+body{
+    background-color: gray;
+}
+
+#play{
+    width: 400px;
+    height: 430px;
+    margin: 50px auto;
+    background-color: #999;
+}
+
+#big_pic{
+    position: relative;
+    width: 400px;
+    height: 320px;
+}
+
+#big_pic li{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 400px;
+    height: 320px;
+    overflow: hidden;  /*注意：这里一定要设置，要不然li里面的img宽度会溢出，导致js里面设置高度动画不可用。*/
+}
+
+#prev{
+    position: absolute;
+    width:60px;
+    height: 60px;
+    top: 130px;
+    left: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 8;
+    background: url(images/btn.gif) no-repeat;
+}
+
+#next{
+    position: absolute;
+    width:60px;
+    height: 60px;
+    top: 130px;
+    right: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 9;
+    background: url(images/btn.gif) no-repeat 0px -60px;   /*注意：这里是background而不是background-image*/
+}
+
+#mark_left{
+    background-color: red;
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 320px;
+    top: 0px;
+    left: 0px;
+    z-index: 6;
+}
+
+#mark_right{
+    background-color: blue;
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 320px;
+    top: 0px;
+    right:0px;
+    z-index: 7;
+}
+
+#small_pic{
+    width: 380px;
+    height: 94px;
+    position: relative;
+    top: 7px;
+    left: 10px;
+    overflow: hidden;
+}
+
+#small_pic ul{
+    height: 94px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#small_pic li{
+    width: 120px;
+    height: 94px;
+    float: left;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    padding-right: 10px;
+}
+
+#small_pic li img{
+    width: 120px;
+    height: 94px;
+}
