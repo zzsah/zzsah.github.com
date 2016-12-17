@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>表单</title>
+</head>
+<body>
+	<form action="http://www.baidu.com" method="post">
+		<p>
+			用户名：<input type="text" name="username" value="HOHO"/>
+		</p>
+		<p>
+			密码：<input type="password" name="password" value="zhouzhou"/>
+		</p>
+		<p>
+			性别：男<input type="radio" name="gender" value="男" checked="checked"  />女<input type="radio" name="gender" value="女" />
+		</p>
+		<p>
+			爱好：篮球<input type="checkbox" name="hobby" value="篮球" />
+			足球<input type="checkbox" name="hobby" value="足球" />
+			乒乓球<input type="checkbox" name="hobby" value="乒乓球" />
+			吉他<input type="checkbox" name="hobby" value="吉他" checked="checked" />
+			书法<input type="checkbox" name="hobby" value="书法" />
+		</p>
+		<p>
+			<select name="education" id="" >
+				<option value="大学" >大学</option>
+				<option value="高中" selected="selected">高中</option>
+				<option value="初中">初中</option>
+				<option value="小学">小学</option>
+			</select>
+		</p>
+		<p>
+			<textarea name="intro" id="" cols="30" rows="10">锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦。</textarea>
+		</p>
+		<p>
+			上传头像：<input type="file" name="pic" />
+		</p>
+		<p>
+			隐藏域：<input type="hidden" name="ip" value="192.168.1.1" />
+		</p>
+		<p>
+			<input type="submit" value="submit">
+		</p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+	</form>
+</body>
+</html>

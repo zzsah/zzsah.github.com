@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>有序列表与无序列表</title>
+	<style>
+		ul{
+			border:1px solid #ff7373;
+			padding:20px;
+		}
+		ul li{
+			list-style-type:none;
+			list-style-image:url(./img/ico.png)
+		}
+		
+		ol{
+			border:1px solid #ff7373;
+			padding:20px;
+		}
+		ol li{
+			list-style-type:none;
+			list-style-image:url(./img/ico.png)
+		}
+		
+		#sublist{
+			border:0px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>春</li>
+		<li>夏</li>
+		<li>秋</li>
+		<li>冬</li>
+	</ul>
+	<ol>
+		<li>一等奖
+				<ul id="sublist">
+				<li>一等奖1</li>
+				<li>一等奖2</li>
+				<li>一等奖3</li>
+				<li>一等奖4</li>
+				</ul>
+		</li>
+		<li>二等奖</li>
+		<li>三等奖</li>
+		<li>四等奖</li>
+	</ol>
+	<p>还有一种叫自定义列表的东西&lt;dl&gt;</p>
+	<dl>
+		<dt>&lt;dt&gt;标签用于定义列表中的项目</dt>
+		<dd>
+		&lt;dd&gt;标签用于定义列表中的描述
+		</dd>
+		<dt>&lt;dt&gt;标签用于定义列表中的项目</dt>
+		<dd>
+		&lt;dd&gt;标签用于定义列表中的描述
+		</dd>
+		<dt>&lt;dt&gt;标签用于定义列表中的项目</dt>
+		<dd>
+		&lt;dd&gt;标签用于定义列表中的描述
+		</dd>
+	</dl>
+</body>
+</html>

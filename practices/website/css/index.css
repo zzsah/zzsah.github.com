@@ -1,0 +1,162 @@
+#container{
+	width:1000px;
+	margin:0px auto;
+}
+#header{
+	height:130px;
+	background:gray url(../images/top_bg.png);
+}
+#nav li{
+	float:left;
+	width:90px;
+	margin-right:1px;
+}
+#nav li a{
+	color:white;
+	font-size:15px;
+	font-family:'微软雅黑';
+	display:block;
+	width:90px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+}
+#nav li a:hover{
+	color:black;
+	background:url(../images/nav_on.gif);
+}
+
+#cleardiv{
+	width:0px;
+	height:0px;
+	clear:both;
+}
+
+#main{
+	margin-top:10px;
+}
+
+#lside{
+	width:690px;
+	height:600px;
+	background:#cecebf;
+	float:left;
+}
+
+.subtitle{
+	height:50px;
+	background:#777777;
+}
+.subtitle img{
+	margin-top:10px;
+	margin-left:10px;
+	float:left;
+}
+.subtitle h1{
+	margin-left:10px;
+	float:left;
+	font-family:'Microsoft Yahei',SimHei,sans-serif;
+	font-size:20px;
+	line-height:50px;
+}
+.subtitle a{
+	float:right;
+	font-size:15px;
+	line-height:50px;
+}
+
+.news{
+	margin:10px;
+	padding:10px;
+	width:305px;
+	height:235px;
+	background:#EEEEEE;
+	float:left;
+}
+.news h2{
+	font-family:'Microsoft Yahei',SimHei,sans-serif;
+	
+}
+.news img{
+	margin-top:10px;
+	border:10px solid white;
+	width:180px;
+	height:180px;
+	float:left;	
+}
+
+.news ul{
+	float:left;
+	margin-top:10px;
+	margin-left:20px;
+}
+
+.news ul li{
+	font-family:'Microsoft Yahei',SimHei,sans-serif;
+	margin-bottom:10px;
+	height:20px;
+	background:url(../images/ico.png) no-repeat;
+	padding-left:10px;
+	font-size:14px;
+}
+
+#rside{
+	width:290px;
+	height:600px;
+	background:#cccccc;
+	float:right;
+}
+
+#article{
+	margin-top:10px;
+}
+
+#article a{
+	display:block;
+	font-family:'Microsoft Yahei',SimHei,sans-serif;
+	font-size:15px;
+}
+
+#article a:hover{
+	background:url(../images/nav_on.gif);
+}
+
+#article li{
+	margin-left:10px;
+	margin-bottom:10px;
+	background:url(../images/ico.png) no-repeat;
+	padding-left:10px;
+}
+
+#contact{
+	width:250px;
+	height:250px;
+	padding:10px;
+	font-family:'Microsoft Yahei',SimHei,sans-serif;
+	font-size:15px;
+	
+}
+
+#footer{
+	width:1000px;
+	height:100px;
+	background:#EEE;
+	margin-top:10px;
+	padding-top:10px;
+}
+
+#footer ul{
+	height:20px;
+	margin-left:10px;
+}
+
+#footer li{
+	float:left;
+	margin-right:10px;	
+	font-family:'Microsoft Yahei';
+}
+
+#footer address{
+	margin-left:10px;
+	font-family:'Microsoft Yahei';
+}

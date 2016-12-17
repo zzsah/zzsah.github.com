@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>img标签是块状还是内联？</title>
+	<style>
+	img{
+		width:300px;
+		height:200px;
+		
+		display:block;
+		float:left;
+	}
+	div{
+		width:300px;
+		height:200px;
+		background:#4ca6ff;
+		text-align:center;
+		clear:left;
+	}
+	</style>
+</head>
+<body>
+	<img src="./img/dog.jpg" alt="小狗图片" title="此处是一张小狗图片">
+	<img src="./img/dog.jpg" alt="小狗图片" title="此处是一张小狗图片">
+	<div>图片是内联元素，同时是内联替换元素。可以设置宽和高。若要设置margin值，需要让其显示为块状元素。</div>
+</body>
+</html>
