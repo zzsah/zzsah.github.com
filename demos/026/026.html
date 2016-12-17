@@ -42,7 +42,7 @@
         width: 280px;
         height: 20px;
         background-color: gray;
-        color: white;
+        color: lightgreen;
         padding: 0px 10px;
         margin-top: 20px;
     }
@@ -110,12 +110,12 @@
         height: 35px;
         margin-right: 10px;
         margin-bottom: 20px;
-        background-color: orange;
+        background-color: gray;
         float: left;
     }
     
     .number0:hover {
-        background-color: #F8B922;
+        background-color: #616161;
     }
     
     .dot {
@@ -162,7 +162,7 @@
                     com1("x");
                     break;
                 case "÷":
-                    com1("÷")
+                    com1("÷");
                     break;
                 case "-":
                     if (inputText.value == "()") {
@@ -172,18 +172,18 @@
                     }
                     break;
                 case "+":
-                    com1("+")
+                    com1("+");
                     break;
                 case "=":
                     com();
                     break;
                 case "()":
                     if (!/[\d\)]$/.test(formula.value) && !/^\(/.test(inputText.value)) {
-                        inputText.value = "(" + inputText.value + ")"
+                        inputText.value = "(" + inputText.value + ")";
                     }
                     break;
                 case ".":
-                    if (/^(\()?(\-)?\d+\./.test(inputText.value) || inputText.value == "" || /[\)\d]$/.test(formula.value)) {
+                    if (/^\(\-\)/.test(inputText.value)||/^(\()?(\-)?\d+\./.test(inputText.value) || inputText.value == "" || /[\)\d]$/.test(formula.value)) {
                         return;
                     } else if (!/^\(/.test(inputText.value)) {
                         inputText.value = inputText.value + ".";
@@ -229,7 +229,7 @@
                 return;
             }
             if (inputText.value < 0) {
-                inputText.value = "(" + inputText.value + ")"
+                inputText.value = "(" + inputText.value + ")";
             }
             formula.value = formula.value + inputText.value;
             inputText.value = "";

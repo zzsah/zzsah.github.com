@@ -72,8 +72,8 @@ function drawBoom(obj) {
 
 
 function Tank(x, y, direct, color, speed, isLive) {
-    this.timerShotHero = null;
-    this.timerChangeEnemyDirect = null;
+    // this.timerShotHero = null;
+    // this.timerChangeEnemyDirect = null;
     this.isLive = isLive;
     this.x = x;
     this.y = y;

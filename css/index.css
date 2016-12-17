@@ -5,29 +5,38 @@
 @font-face {
     font-family: lixv;
     /*Chrome&FF*/
-    src: url(../font/lixv.ttf),
-    /*IE9+*/
+    src: url(../font/lixv.ttf), /*IE9+*/
     url('../font/lixv.eot');
 }
 
 html {
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 h1 {
     height: 25px;
     font: normal bold 14px/25px 'Microsoft Yahei';
+    padding-left: 10px;
 }
 
-#container {}
+#container {
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    /*background-color: orange;*/
+    position: absolute;
+    z-index: 1;
+}
 
 aside {
     width: 210px;
-    float: left;
     height: 100%;
-    background-color: #eeeeee;
-    /*box-shadow: 4px 4px 4px rgba( 150, 150, 150, 0.3);*/
+    position: absolute;
+    background-color: #eee;
+    box-shadow: 4px 4px 4px rgba( 150, 150, 150, 0.3);
     overflow: hidden;
+    bottom: 0px;
+    z-index: 3;
 }
 
 #logo {
@@ -137,58 +146,14 @@ aside {
 }
 
 #content {
-    float: right;
-    /*background-color: pink;*/
-}
-
-header {
-    width: 100%;
-    height: 0px;
-    /*background-color: blue;*/
-    margin: 0px auto;
-    float: left;
-}
-
-header nav {
-    height: 30px;
-    width: 100%;
-    background-color: #eeeeee;
+    height: 100%;
+    width: auto;
+    margin-left: 210px;
+    bottom: 0px;
+    z-index: 2;
     overflow: hidden;
 }
-
-header nav li {
-    height: 30px;
-    font: normal bold 20px/30px "宋体";
-    margin-right: 50px;
-    float: right;
-}
-
-header nav ul li a {
-    color: #666666;
-}
-
-header nav li:hover {
-    border-top: 3px solid #99cc00;
-}
-
 #iframeBox {
     width: 100%;
     height: 100%;
-    /*border-left: 3px solid #aaaaaa;*/
-    /*background-color: #cccccc;*/
-    float: left;
-}
-
-footer {
-    clear: both;
-    background-color: #eee;
-    ;
-    height: 0px;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
-    font: normal normal 13px/20px '宋体';
-    color: gray;
-    text-shadow: 2px 2px 2px #aaaaaa;
-    text-align: right;
 }
