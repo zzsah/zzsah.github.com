@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>导航栏滑动效果</title>
+    <style>
+    .menu-list {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+        background-color: #01204f;
+    }
+    
+    .lavalamp-item {
+        float: left;
+        list-style: none;
+    }
+    
+    .lavalamp-item a {
+        text-decoration: none;
+        line-height: 40px;
+        font-weight: 700;
+        margin-right: 2px;
+        padding: 0 10px;
+        color: #fff;
+        width: 100%;
+        position: relative;
+        font-size: 100%;
+    }
+    
+    .lavalamp {
+        margin: 0;
+    }
+    
+    .icon-new {
+        position: absolute;
+        right: -8px;
+        top: -8px;
+        width: 26px;
+        height: 13px;
+        background: url(http://ns2.bdstatic.com/static/fisp_static/common/img/navbar/icon-new_b295ac1.png) no-repeat;
+        -webkit-transition: margin .1s;
+        -o-transition: margin .1s;
+        transition: margin .1s;
+    }
+    
+    .lavalamp-object {
+        background-color: #c00;
+    }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script>
+    $(function() {
+        /
+        页面加载完毕获取第一个li的width和top值
+        赋值为div# active
+            /
+            var divWidth = $("#smooth>li").first().width();
+        var divLeft = $("#smooth>li").first().position().left;
+        var firstWidth = divWidth;
+        var firstLeft = divLeft;
+        $("#active").css({
+            width: divWidth,
+            left: divLeft
+        });
+        $("#smooth>li").mouseenter(function() {
+            /
+            mouseenter某个li获取其width和top值
+            赋值给# active并加120ms的动画效果
+                /
+                divWidth = $(this).width();
+            divLeft = $(this).position().left;
+            $("#active").animate({
+                width: divWidth,
+                left: divLeft
+            }, 120);
+        });
+        $("#smooth").mouseleave(function() {
+            /
+            鼠标离开整个div(没有点击li) 时
+            回到第一个li的位置
+                /
+                $("#active").stop(true, true).animate({
+                    width: firstWidth,
+                    left: firstLeft
+                }, 120);
+        })
+    })
+    </script>
+</head>
+
+<body>
+    <div class="menu-list">
+        <ul class="clearfix lavalamp" style="position: relative;" id="smooth">
+            <div class="lavalamp-object" id="active" style="position: absolute; height: 40px; top: 0px; left: 0px; overflow: hidden;"></div>
+            <li class="navitem-index current active lavalamp-item" style="z-index: 5; position: relative;">首页</li>
+            <li class="icon-new-wrapper lavalamp-item" style="z-index: 5; position: relative;">
+                <a href="http://baijia.baidu.com/" id="nav-hot-link" target="_blank">
+                    <div class="icon-new"></div>百家</a>
+            </li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">财经</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">娱乐</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">体育</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">互联网</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">
+                <div class="icon-new"></div>时尚</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">汽车</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">国内</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">国际</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">军事</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">社会</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">视频</li>
+            <li class="media-container lavalamp-item" style="z-index: 5; position: relative;">
+                <a href="http://media.baidu.com/" target="_blank" class="link-trigger">传媒</a>
+                <div class="links-container clearfix" style="display: none;">
+                    <a href="http://cankaoxiaoxi.media.baidu.com/" target="_blank">参考消息</a>
+                    <a href="http://infzm.media.baidu.com/" target="_blank">南方周末</a>
+                    <a href="http://pengpai.media.baidu.com/" target="_blank">澎湃</a>
+                    <a href="http://nandu.media.baidu.com/" target="_blank">南方都市报</a>
+                    <a href="http://21cbh.media.baidu.com/" target="_blank">21世纪经济报道</a>
+                    <a href="http://yicai.media.baidu.com/" target="_blank">第一财经日报</a>
+                    <a href="http://huaxi.media.baidu.com/" target="_blank">华西都市报</a>
+                    <a href="http://caixin.media.baidu.com/" target="_blank">财新网</a>
+                    <a href="http://xxcb.media.baidu.com/" target="_blank">潇湘晨报</a>
+                    <a href="http://ynet.media.baidu.com/" target="_blank">北京青年报</a>
+                </div>
+            </li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="http://jian.news.baidu.com/" target="_blank">个性推荐</a></li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;">房产</li>
+            <li class="lavalamp-item" style="z-index: 5; position: relative;"><a href="http://news.hao123.com/?src=baidunews_1016" mon="toptab=newssite&resouci=1">名站</a></li>
+            <li class="more-container lavalamp-item" style="z-index: 5; position: relative;">
+                <a href="#" class="more-trigger">更多</a>
+                <div class="more-links" style="display: none;">
+                    科技 女人 游戏
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
+文／擂鼓人（简书作者） 原文链接：http://www.jianshu.com/p/320f62514a32 著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。
