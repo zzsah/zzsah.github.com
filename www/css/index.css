@@ -13,7 +13,7 @@ body {
 
 #welcome {
     width: 1000px;
-    height: 150px;
+    height: 100px;
     /*background:blue;*/
     margin: 0px auto;
 }
@@ -21,19 +21,19 @@ body {
 #welcome img {
     display: block;
     float: left;
-    height: 150px;
+    height: 100px;
 }
 
 #description {
     float: left;
     width: 700px;
-    height: 150px;
+    height: 100px;
     /*background: red;*/
 }
 
 #description p {
-    color: #aaa;
-    font: normal normal 55px/200px Monotype Corsiva;
+    color: #002060;
+    font: normal bold 45px/140px Monotype Corsiva;
 }
 
 .menu {
@@ -64,10 +64,10 @@ body {
     display: block;
     padding: 0 23px;
     line-height: 40px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #111;
-    letter-spacing: 0.2em;
+    /*letter-spacing: 0.2em;*/
     font-family: Georgia, sans-serif;
     text-shadow: 2px 2px 2px #fff;
 }
@@ -114,7 +114,7 @@ body {
     height: 345px;
     margin: 20px;
     /*margin: 10px auto;*/
-    background-color: #999;
+    background-color: #eee;
     float: left;
 }
 
@@ -162,7 +162,7 @@ body {
 }
 
 #mark_left {
-    background-color: red;
+    /*background-color: red;*/
     position: absolute;
     opacity: 0;
     width: 200px;
@@ -173,7 +173,7 @@ body {
 }
 
 #mark_right {
-    background-color: blue;
+    /*background-color: blue;*/
     position: absolute;
     opacity: 0;
     width: 200px;
@@ -257,10 +257,11 @@ body {
     /*height: 800px;*/
     float: right;
     border-radius: 10px;
+    padding-top: 13px;
 }
 
 #sidebar h3{
-    margin-left: 10px;
+    margin-left: 15px;
     color: #0070C0;
     font: normal normal 20px/30px Georgia, sans-serif;
 }
