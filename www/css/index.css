@@ -33,7 +33,7 @@ body {
 
 #description p {
     color: #002060;
-    font: normal bold 45px/140px Monotype Corsiva;
+    font: normal bold 45px/130px Monotype Corsiva;
 }
 
 .menu {
@@ -64,7 +64,7 @@ body {
     display: block;
     padding: 0 23px;
     line-height: 40px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #111;
     /*letter-spacing: 0.2em;*/
@@ -74,7 +74,7 @@ body {
 
 .menu .block {
     width: 48px;
-    height: 2px;
+    height: 3px;
     background: #fff;
     position: absolute;
     bottom: 0px;
