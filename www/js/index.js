@@ -39,7 +39,7 @@ window.onload = function() {
     var now = 0;
 
 
-    // startMove(aLiSmall[now], "opacity", 100);
+    startMove(aLiBig[0], "opacity", 100);
 
     oSmallUl.style.width = aLiSmall[0].offsetWidth * aLiSmall.length + "px";
 
@@ -101,9 +101,12 @@ window.onload = function() {
     }
 
     function changeBig() {
-        aLiBig[now].style.height = 0 + "px";
+        // aLiBig[now].style.height = 0 + "px";
         aLiBig[now].style.zIndex = nowIndex++;
-        startMove(aLiBig[now], "height", 250);
+        for(var i = 0; i < aLiBig.length; i++){
+        	startMove(aLiBig[i], "opacity", 0);
+        }
+        startMove(aLiBig[now], "opacity", 100);
         for (var i = 0; i < aLiSmall.length; i++) {
             startMove(aLiSmall[i], "opacity", 60);
         }
@@ -120,13 +123,13 @@ window.onload = function() {
         }
     }
 
-    var timer = setInterval(oBtnNext.onclick, 2000);
+    var timer = setInterval(oBtnNext.onclick, 4000);
     oDiv.onmouseover = function() {
         clearInterval(timer);
     }
 
     oDiv.onmouseout = function() {
-        timer = setInterval(oBtnNext.onclick, 2000);
+        timer = setInterval(oBtnNext.onclick, 4000);
     }
 }
 

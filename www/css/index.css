@@ -53,6 +53,7 @@ body {
     position: relative;
     margin: 0 auto;
     /*outline: 1px solid black;*/
+    overflow: hidden;
 }
 
 .menu ul li {
@@ -84,10 +85,11 @@ body {
 #showCase {
     width: 1000px;
     height: 400px;
-    background: rgba( 200, 200, 200, 0.9);
+    background: rgba( 240, 240, 240, 0.9);
     border-radius: 10px;
     margin: 10px auto;
     padding-top: 10px;
+    background: url(../img/show-bg.jpg);
 }
 
 #articles {
@@ -129,6 +131,8 @@ body {
     width: 400px;
     height: 250px;
     overflow: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
     /*注意：这里一定要设置，要不然li里面的img宽度会溢出，导致js里面设置高度动画不可用。*/
 }
 
@@ -234,7 +238,7 @@ body {
     /*height: 1200px;*/
     float: left;
     border-radius: 10px;
-    background: rgba( 200, 200, 200, 0.9);
+    background: rgba( 240, 240, 240, 0.9);
 }
 
 #content p{
@@ -248,7 +252,7 @@ body {
 }
 
 #sidebar {
-    background: rgba( 200, 200, 200, 0.9);
+    background: rgba( 240, 240, 240, 0.9);
     width: 300px;
     /*height: 800px;*/
     float: right;
@@ -262,20 +266,20 @@ body {
 }
 
 #sidebar ul{
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 #sidebar li{
-    list-style-type: circle;
+    list-style-type: disc;
     margin-left: 20px;
     margin-bottom: 5px;
     color: #111;
-    font: normal normal 15px/20px Georgia, sans-serif;
+    font: normal normal 14px/20px Georgia, sans-serif;
 }
 #sidebar a:visited{
     color:#111;
 }
-#sidebar a:hover{
+#sidebar li:hover{
     color:#0070C0;
 }
 
@@ -283,9 +287,15 @@ body {
 #footer {
     width: 980px;
     height: 50px;
-    background: rgba( 200, 200, 200, 0.9);
+    background: rgba( 240, 240, 240, 0.9);
     border-radius: 10px;
     margin: 10px auto;
     padding: 10px;
-    font: normal normal 14px/16px Georgia, sans-serif;
+    color: #999;
+    font: normal normal 12px/16px Georgia, sans-serif;
+}
+
+#footer a{
+    color: #999;
+    text-decoration: underline;
 }
