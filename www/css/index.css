@@ -114,7 +114,7 @@ body {
     height: 345px;
     margin: 20px;
     /*margin: 10px auto;*/
-    background-color: #eee;
+    background-color: rgba( 240, 240, 240, 0.5);
     float: left;
 }
 
