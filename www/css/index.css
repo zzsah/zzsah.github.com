@@ -7,16 +7,43 @@
     text-decoration: none;
 }
 
-body{
-  padding-top: 40px;
+body {
+    /*padding-top: 40px;*/
 }
+
+#welcome {
+    width: 1000px;
+    height: 150px;
+    /*background:blue;*/
+    margin: 0px auto;
+}
+
+#welcome img {
+    display: block;
+    float: left;
+    height: 150px;
+}
+
+#description {
+    float: left;
+    width: 700px;
+    height: 150px;
+    /*background: red;*/
+}
+
+#description p {
+    color: #aaa;
+    font: normal normal 55px/200px Monotype Corsiva;
+}
+
 .menu {
     width: 100%;
     height: 40px;
     background: rgba( 100, 100, 100, 0.8);
+    background: #D8D8D8;
     box-shadow: 0 0 2px;
-    position: fixed;
-    top: 0px;
+    /*position: fixed;*/
+    /*top: 0px;*/
 }
 
 .menu ul {
@@ -38,8 +65,10 @@ body{
     line-height: 40px;
     font-size: 14px;
     font-weight: bold;
-    color: #fff;
+    color: #111;
     letter-spacing: 0.2em;
+    font-family: Georgia, sans-serif;
+    text-shadow: 2px 2px 2px #fff;
 }
 
 .menu .block {
@@ -54,10 +83,130 @@ body{
 
 #showCase {
     width: 1000px;
-    height: 300px;
+    height: 400px;
     background: rgba( 200, 200, 200, 0.9);
     border-radius: 10px;
     margin: 10px auto;
+    padding-top: 10px;
+}
+
+#articles {
+    width: 500px;
+    height: 345px;
+    margin: 20px;
+    /*background: red;*/
+    float: left;
+}
+
+#articles h2 {
+    font: normal normal 25px/30px Georgia, sans-serif;
+    margin-bottom: 10px;
+}
+
+#articles p {
+    font: normal normal 17px/20px Georgia, sans-serif;
+}
+
+#play {
+    width: 400px;
+    height: 345px;
+    margin: 20px;
+    /*margin: 10px auto;*/
+    background-color: #999;
+    float: left;
+}
+
+#big_pic {
+    position: relative;
+    width: 400px;
+    height: 250px;
+}
+
+#big_pic li {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 400px;
+    height: 250px;
+    overflow: hidden;
+    /*注意：这里一定要设置，要不然li里面的img宽度会溢出，导致js里面设置高度动画不可用。*/
+}
+
+#prev {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 95px;
+    left: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 8;
+    background: url(../img/btn.gif) no-repeat;
+}
+
+#next {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 95px;
+    right: 20px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 9;
+    background: url(../img/btn.gif) no-repeat 0px -60px;
+    /*注意：这里是background而不是background-image*/
+}
+
+#mark_left {
+    background-color: red;
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 250px;
+    top: 0px;
+    left: 0px;
+    z-index: 6;
+}
+
+#mark_right {
+    background-color: blue;
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 250px;
+    top: 0px;
+    right: 0px;
+    z-index: 7;
+}
+
+#small_pic {
+    width: 380px;
+    height: 75px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    overflow: hidden;
+}
+
+#small_pic ul {
+    height: 75px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#small_pic li {
+    width: 120px;
+    height: 75px;
+    float: left;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    padding-right: 10px;
+}
+
+#small_pic li img {
+    width: 120px;
+    height: 75px;
 }
 
 #mainBody {
@@ -66,12 +215,9 @@ body{
     overflow: hidden;
 }
 
-#content {
-    /*background:pink;*/
+/*#content {
     width: 100%;
-    /*height: 300px;*/
     margin-left: -310px;
-    /*给sidebar让出210个像素*/
     float: left;
 }
 
@@ -79,22 +225,67 @@ body{
     height: 1200px;
     background: rgba( 200, 200, 200, 0.9);
     margin-left: 310px;
-    /*把遮住的内容挤出来*/
     border-radius: 10px;
+}
+*/
+
+#content{
+    width: 690px;
+    /*height: 1200px;*/
+    float: left;
+    border-radius: 10px;
+    background: rgba( 200, 200, 200, 0.9);
+}
+
+#content p{
+    width: 650px;
+    margin:20px auto;
+    /*background: pink;*/
+}
+
+#content img{
+    width: 650px;
 }
 
 #sidebar {
     background: rgba( 200, 200, 200, 0.9);
     width: 300px;
-    height: 800px;
+    /*height: 800px;*/
     float: right;
     border-radius: 10px;
 }
 
+#sidebar h3{
+    margin-left: 10px;
+    color: #0070C0;
+    font: normal normal 20px/30px Georgia, sans-serif;
+}
+
+#sidebar ul{
+    margin-left: 5px;
+}
+
+#sidebar li{
+    list-style-type: circle;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    color: #111;
+    font: normal normal 15px/20px Georgia, sans-serif;
+}
+#sidebar a:visited{
+    color:#111;
+}
+#sidebar a:hover{
+    color:#0070C0;
+}
+
+
 #footer {
-    width: 1000px;
-    height: 100px;
+    width: 980px;
+    height: 50px;
     background: rgba( 200, 200, 200, 0.9);
     border-radius: 10px;
     margin: 10px auto;
+    padding: 10px;
+    font: normal normal 14px/16px Georgia, sans-serif;
 }
